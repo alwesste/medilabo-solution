@@ -1,4 +1,4 @@
-package com.medilabo.config_serveur;
+package com.medilabo.config_server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

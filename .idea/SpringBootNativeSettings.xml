@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SpringBootNativeSettings">
+    <option name="linkedExternalProjectsSettings">
+      <NativeProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/config-server/src/main/java/com/medilabo/config_server/ConfigServerApplication.java" />
+        <option name="qualifiedMainClassName" value="com.medilabo.config_server.ConfigServerApplication" />
+        <option name="runConfigurationName" value="ConfigServerApplication" />
+      </NativeProjectSettings>
+      <NativeProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/PatientApplication.java" />
+        <option name="qualifiedMainClassName" value="com.medilabo.patient.PatientApplication" />
+        <option name="runConfigurationName" value="PatientApplication" />
+      </NativeProjectSettings>
+    </option>
+  </component>
+</project>
