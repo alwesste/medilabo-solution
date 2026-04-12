@@ -1,23 +1,13 @@
-package com.medilabo.patient.entities;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+package com.medilabo.medilabo_ui.models;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "patient")
-public class Patient extends Person {
+public class PatientBean {
+
     private Date birthDate;
     private String genre;
     private String adressePostal;
     private String phoneNumber;
-
-    @ManyToOne
-    @JoinColumn(name = "medecin_id")
-    private Medecin medecin;
 
     public Date getBirthDate() {
         return birthDate;
@@ -51,4 +41,15 @@ public class Patient extends Person {
         this.phoneNumber = phoneNumber;
     }
 
+    public void checkHistoric() {
+        System.out.println("Voir historique");
+    }
+
+    public void addNote() {
+        System.out.println("Voir note");
+    }
+
+    public void generalReport() {
+        System.out.println("generateReport");
+    }
 }
