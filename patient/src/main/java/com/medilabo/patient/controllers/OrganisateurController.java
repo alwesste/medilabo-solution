@@ -18,7 +18,7 @@ public class OrganisateurController {
         this.organisateurService = organisateurService;
     }
 
-    @GetMapping({"", "/"})
+    @GetMapping()
     public List<Patient> checkAllPatients() {
         return organisateurService.getAllPatients();
     }

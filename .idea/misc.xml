@@ -9,6 +9,8 @@
         <option value="$PROJECT_DIR$/config-serveur-repo/pom.xml" />
         <option value="$PROJECT_DIR$/medilabo-ui/pom.xml" />
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/eureka/pom.xml" />
       </list>
     </option>
   </component>
