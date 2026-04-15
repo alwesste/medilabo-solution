@@ -2,9 +2,7 @@ package com.medilabo.patient.controllers;
 
 import com.medilabo.patient.entities.Patient;
 import com.medilabo.patient.services.impl.OrganisateurService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,8 +16,18 @@ public class OrganisateurController {
         this.organisateurService = organisateurService;
     }
 
-    @GetMapping()
+    @GetMapping
     public List<Patient> checkAllPatients() {
         return organisateurService.getAllPatients();
+    }
+
+    @PatchMapping
+    public Patient updatePatient(@RequestBody Patient patient) {
+        return organisateurService.updatePatient(patient);
+    }
+
+    @PostMapping
+    public Patient addPatient(@RequestBody Patient patient) {
+        return organisateurService.addPatient(patient);
     }
 }

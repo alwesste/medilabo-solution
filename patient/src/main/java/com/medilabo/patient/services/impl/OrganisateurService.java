@@ -20,7 +20,7 @@ public class OrganisateurService implements IOrganisateurService {
     @Override
     public Patient updatePatient(Patient patient) {
         Patient patientToUpdate = patientDAO.findById(patient.getId())
-                .orElseThrow(() -> new EntityNotFoundException("Le patient n'a pas ete trouve"));
+                .orElseThrow(() -> new EntityNotFoundException("Le patient n'a pas ete trouve" + patient.getPrenom()));
 
         patientToUpdate.setPrenom(patient.getPrenom());
         patientToUpdate.setNom(patient.getNom());
@@ -29,7 +29,7 @@ public class OrganisateurService implements IOrganisateurService {
         patientToUpdate.setAdressePostal(patient.getAdressePostal());
         patientToUpdate.setPhoneNumber(patient.getPhoneNumber());
 
-        return patientToUpdate;
+        return patientDAO.save(patientToUpdate);
     }
 
     @Override
