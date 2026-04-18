@@ -1,17 +1,48 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Medilabo</title>
-</head>
-<body>
-    <h1>Medilabo</h1>
-    <h2>Espace Patient</h2>
-    <div>
 
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .patient-card { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+    </style>
+</head>
+
+<body>
+
+<h1>Patient</h1>
+
+
+<h3 th:text="${patient.prenom + ' ' + patient.nom}">Nom</h3>
+
+<p><strong>Date de naissance :</strong>
+    <span th:text="${patient.birthDate}"></span>
+</p>
+
+<p><strong>Genre :</strong>
+    <span th:text="${patient.genre}"></span>
+</p>
+
+<p><strong>Adresse :</strong>
+    <span th:text="${patient.adressePostal}"></span>
+</p>
+
+<p><strong>Telephone :</strong>
+    <span th:text="${patient.phoneNumber}"></span>
+</p>
+
+<div class="actions">
+    <div>
+        <a th:href="@{/update/patient/{id}(id=${patient.id})}">
+            Sélectionner ce patient a modifier
+        </a>
     </div>
+    <div>
+        <a href=""></a>
+    </div>
+</div>
+
 </body>
 </html>

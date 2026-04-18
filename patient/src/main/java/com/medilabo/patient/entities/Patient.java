@@ -1,16 +1,13 @@
 package com.medilabo.patient.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "patient")
 public class Patient extends Person {
-    private Date birthDate;
+    private LocalDate birthDate;
     private String genre;
     private String adressePostal;
     private String phoneNumber;
@@ -19,11 +16,12 @@ public class Patient extends Person {
     @JoinColumn(name = "medecin_id")
     private Medecin medecin;
 
-    public Date getBirthDate() {
+    @Column(name = "birth_date")
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

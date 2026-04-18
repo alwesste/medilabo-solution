@@ -1,6 +1,6 @@
 package com.medilabo.medilabo_ui.models;
 
-public class OrganisateurBean {
+public class OrganisateurBean extends PersonBean {
 
     private PatientBean updatePatient() {
         PatientBean patientBean = null;

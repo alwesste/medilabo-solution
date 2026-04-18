@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Medilabo - Liste des Patients</title>
+
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .patient-card { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+    </style>
+</head>
+
+<body>
+
+<h1>Liste des patients</h1>
+
+<div th:if="${#lists.isEmpty(patients)}">
+    <p>Aucun patient trouvé.</p>
+</div>
+
+<div>
+    <a th:href="@{/add/patient}">
+        Ajouter un nouveau patient
+    </a>
+</div>
+
+<div th:each="patient : ${patients}" class="patient-card">
+
+    <h3 th:text="${patient.prenom + ' ' + patient.nom}"></h3>
+
+    <div class="actions">
+        <a th:href="@{/patient/details/{id}(id=${patient.id})}" class="btn-select">
+            Sélectionner ce patient
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

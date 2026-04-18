@@ -1,19 +1,19 @@
 package com.medilabo.medilabo_ui.models;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-public class PatientBean {
+public class PatientBean extends PersonBean {
 
-    private Date birthDate;
+    private LocalDate birthDate;
     private String genre;
     private String adressePostal;
     private String phoneNumber;
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

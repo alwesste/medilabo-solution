@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrganisateurService implements IOrganisateurService {
@@ -48,6 +49,11 @@ public class OrganisateurService implements IOrganisateurService {
             throw new IllegalArgumentException("Un patient avec ce nom, prénom et date de naissance existe déjà");
         }
         return patientDAO.save(patient);
+    }
+
+    @Override
+    public Optional<Patient> getPatientById(Long id) {
+        return patientDAO.findById(id);
     }
 
     @Override

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Medilabo</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        input { display: block; margin-bottom: 10px; padding: 5px; width: 300px; }
+        button { padding: 8px 16px; cursor: pointer; margin-right: 10px; }
+        a { text-decoration: none; color: #333; }
+    </style>
+</head>
+<body>
+
+<h1>Ajouter un Patient</h1>
+
+<form th:action="@{/add/patient}"
+      th:object="${patientBean}"
+      method="post">
+
+    <label>Prénom</label>
+    <input type="text" th:field="*{prenom}"/>
+
+    <label>Nom</label>
+    <input type="text" th:field="*{nom}"/>
+
+    <label>Date de naissance</label>
+    <input type="date" th:field="*{birthDate}"/>
+
+    <label>Genre</label>
+    <input type="text" th:field="*{genre}"/>
+
+    <label>Adresse</label>
+    <input type="text" th:field="*{adressePostal}"/>
+
+    <label>Téléphone</label>
+    <input type="text" th:field="*{phoneNumber}"/>
+
+    <button type="submit">Ajouter</button>
+    <a th:href="@{/patients}">Annuler</a>
+</form>
+</body>
+</html>

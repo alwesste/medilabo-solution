@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Medilabo</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        input { display: block; margin-bottom: 10px; padding: 5px; width: 300px; }
+        button { padding: 8px 16px; cursor: pointer; margin-right: 10px; }
+        a { text-decoration: none; color: #333; }
+    </style>
+</head>
+<body>
+
+<h1>Détail Patient</h1>
+
+<h3 th:text="${patient.prenom + ' ' + patient.nom}">Nom</h3>
+
+<form th:action="@{/update/patient/{id}(id=${patient.id})}"
+      method="post">
+
+    <input type="hidden"
+           name="id"
+           th:value="${patient.id}"/>
+
+    <label>Prénom</label>
+    <input type="text"
+           name="prenom"
+           th:value="${patient.prenom}"/>
+
+    <label>Nom</label>
+    <input type="text"
+           name="nom"
+           th:value="${patient.nom}"/>
+
+    <label>Date de naissance</label>
+    <input type="date"
+           name="birthDate"
+           th:value="${patient.birthDate}"/>
+
+    <label>Genre</label>
+    <input type="text"
+           name="genre"
+           th:value="${patient.genre}"/>
+
+    <label>Adresse</label>
+    <input type="text"
+           name="adressePostal"
+           th:value="${patient.adressePostal}"/>
+
+    <label>Téléphone</label>
+    <input type="text"
+           name="phoneNumber"
+           th:value="${patient.phoneNumber}"/>
+
+    <button type="submit">Mettre à jour</button>
+    <a th:href="@{/patients}">Annuler</a>
+</form>
+
+</body>
+</html>

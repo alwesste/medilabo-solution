@@ -2,12 +2,12 @@ package com.medilabo.patient.controllers;
 
 import com.medilabo.patient.entities.Patient;
 import com.medilabo.patient.services.impl.OrganisateurService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/patient")
 public class OrganisateurController {
 
     private final OrganisateurService organisateurService;
@@ -16,17 +16,24 @@ public class OrganisateurController {
         this.organisateurService = organisateurService;
     }
 
-    @GetMapping
+    @GetMapping("/api/patients")
     public List<Patient> checkAllPatients() {
         return organisateurService.getAllPatients();
     }
 
-    @PatchMapping
+    @GetMapping("/api/patient/detail/{id}")
+    public ResponseEntity<Patient> getPatient(@PathVariable Long id) {
+        return organisateurService.getPatientById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/api/patient")
     public Patient updatePatient(@RequestBody Patient patient) {
         return organisateurService.updatePatient(patient);
     }
 
-    @PostMapping
+    @PostMapping("/api/patient")
     public Patient addPatient(@RequestBody Patient patient) {
         return organisateurService.addPatient(patient);
     }
