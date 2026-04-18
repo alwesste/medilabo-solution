@@ -4,13 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f50d33f8-f127-49c3-b3f8-00f3bd0b5ad4" name="Changes" comment="Mise a jour du micro-service Patient">
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/medilabo/gateway/config/SecurityConfig.java" afterDir="false" />
+    <list default="true" id="f50d33f8-f127-49c3-b3f8-00f3bd0b5ad4" name="Changes" comment="Ajout de spring security">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/config/FeignConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medilabo-ui/src/main/resources/templates/patientAdd.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medilabo-ui/src/main/resources/templates/patientList.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/medilabo-ui/src/main/resources/templates/patientUpdate.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-server-repo/gateway.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config-server-repo/gateway.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/medilabo/gateway/config/GatewayConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/medilabo/gateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/medilabo/gateway/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medilabo-ui/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/medilabo-ui/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/constroller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/constroller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/models/OrganisateurBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/models/OrganisateurBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/models/PatientBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/models/PatientBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/models/PersonBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/models/PersonBean.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/proxies/MicroservicePatientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/medilabo-ui/src/main/java/com/medilabo/medilabo_ui/proxies/MicroservicePatientProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/medilabo-ui/src/main/resources/templates/patient.html" beforeDir="false" afterPath="$PROJECT_DIR$/medilabo-ui/src/main/resources/templates/patient.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/DAO/PatientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/DAO/PatientDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/controllers/OrganisateurController.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/controllers/OrganisateurController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/entities/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/entities/Patient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/services/IOrganisateurService.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/services/IOrganisateurService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/services/impl/OrganisateurService.java" beforeDir="false" afterPath="$PROJECT_DIR$/patient/src/main/java/com/medilabo/patient/services/impl/OrganisateurService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,11 +69,18 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-config/7.0.4/spring-security-config-7.0.4.jar!/org/springframework/security/config/annotation/web/configurers/AbstractHttpConfigurer.class" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -70,11 +94,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "Explyt Spring.ConfigServerApplication.executor": "Run",
     "Explyt Spring.EurekaApplication.executor": "Run",
     "Explyt Spring.GatewayApplication.executor": "Run",
     "Explyt Spring.MedilaboUiApplication.executor": "Run",
-    "Explyt Spring.PatientApplication.executor": "Debug",
+    "Explyt Spring.PatientApplication.executor": "Run",
     "Maven.config-server [clean].executor": "Run",
     "Maven.config-server [install].executor": "Run",
     "Maven.eureka [clean].executor": "Run",
@@ -93,16 +118,20 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propCompiler"
+    "settings.editor.selected.configurable": "advanced.settings"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.medilabo.medilabo_ui.config" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\document\Java Openclassrooms\Projet 9\medilabo-solution\medilabo-ui\src\main\resources\templates\patientList" />
       <recent name="C:\document\Java Openclassrooms\Projet 9\medilabo-solution\patient" />
       <recent name="C:\document\Java Openclassrooms\Projet 9\medilabo-solution\patient\src" />
     </key>
   </component>
-  <component name="RunManager" selected="Explyt Spring.GatewayApplication">
+  <component name="RunManager" selected="Explyt Spring.MedilaboUiApplication">
     <configuration name="ConfigServerApplication" type="Spring Boot" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.medilabo.config_server.ConfigServerApplication" />
       <module name="config-server" />
@@ -196,7 +225,23 @@
       <option name="project" value="LOCAL" />
       <updated>1775395651880</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Ajout de methode CRUD dans le proxy de l'UI">
+      <option name="closed" value="true" />
+      <created>1776281732317</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1776281732317</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Ajout de spring security">
+      <option name="closed" value="true" />
+      <created>1776281755600</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1776281755600</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -213,7 +258,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Mise em place micro-services de base" />
     <MESSAGE value="Mise a jour du micro-service Patient" />
-    <option name="LAST_COMMIT_MESSAGE" value="Mise a jour du micro-service Patient" />
+    <MESSAGE value="Ajout de methode CRUD dans le proxy de l'UI" />
+    <MESSAGE value="Ajout de spring security" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajout de spring security" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -227,6 +274,7 @@
     <watches-manager>
       <configuration name="Spring Boot">
         <watch expression="patient" />
+        <watch expression="((ClientController)this).microservicePatientProxy" custom="com.medilabo.medilabo_ui.constroller.ClientController" />
       </configuration>
     </watches-manager>
   </component>
