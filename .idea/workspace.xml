@@ -248,12 +248,12 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Explyt Spring.ConfigServerApplication" />
-      <item itemvalue="Explyt Spring.EurekaApplication" />
+      <item itemvalue="Explyt Spring.PatientNoteApplication" />
       <item itemvalue="Explyt Spring.GatewayApplication" />
+      <item itemvalue="Explyt Spring.ConfigServerApplication" />
       <item itemvalue="Explyt Spring.MedilaboUiApplication" />
       <item itemvalue="Explyt Spring.PatientApplication" />
-      <item itemvalue="Explyt Spring.PatientNoteApplication" />
+      <item itemvalue="Explyt Spring.EurekaApplication" />
     </list>
     <recent_temporary>
       <list>
