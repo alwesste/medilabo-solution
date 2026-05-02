@@ -1,6 +1,8 @@
 package com.medilabo.medilabo_ui.constroller;
 
+import com.medilabo.medilabo_ui.models.NoteBean;
 import com.medilabo.medilabo_ui.models.PatientBean;
+import com.medilabo.medilabo_ui.proxies.MicroserviceNoteProxy;
 import com.medilabo.medilabo_ui.proxies.MicroservicePatientProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +16,11 @@ public class ClientController {
 
     private final MicroservicePatientProxy microservicePatientProxy;
 
-    public ClientController(MicroservicePatientProxy microservicePatientProxy) {
+    private final MicroserviceNoteProxy microserviceNoteProxy;
+
+    public ClientController(MicroservicePatientProxy microservicePatientProxy, MicroserviceNoteProxy microserviceNoteProxy) {
         this.microservicePatientProxy = microservicePatientProxy;
+        this.microserviceNoteProxy = microserviceNoteProxy;
     }
 
     @GetMapping("/patients")
@@ -33,6 +38,12 @@ public class ClientController {
     @GetMapping("patient/details/{id}")
     public String getDetailPatient(@PathVariable Long id, Model model) {
         model.addAttribute("patient", microservicePatientProxy.getPatient(id));
+
+        String note = microserviceNoteProxy.getNoteByPatientId(id);
+        System.out.println("NOTE REÇUE : " + note);
+
+        model.addAttribute("note", note);
+
         return "patient";
     }
 
