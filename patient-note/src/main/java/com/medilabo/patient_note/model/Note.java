@@ -1,35 +1,47 @@
 package com.medilabo.patient_note.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document
+@Document(collection = "note")
 public class Note {
 
+    @Id
     private String id;
-    private Long patientId;
-    private String content;
 
-    public String getId() {
-        return id;
-    }
+    @Field("patId")
+    private Long patId;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    @Field("patient")
+    private String patient;
 
-    public Long getPatientId() {
-        return patientId;
-    }
+    @Field("note")
+    private String note;
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
-    }
+    public String getId() { return id; }
 
-    public String getContent() {
-        return content;
-    }
+    public void setId(String id) { this.id = id; }
 
-    public void setContent(String content) {
-        this.content = content;
+    public Long getPatId() { return patId; }
+
+    public void setPatId(Long patId) { this.patId = patId; }
+
+    public String getPatient() { return patient; }
+
+    public void setPatient(String patient) { this.patient = patient; }
+
+    public String getNote() { return note; }
+
+    public void setNote(String note) { this.note = note; }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "id='" + id + '\'' +
+                ", patId=" + patId +
+                ", patient='" + patient + '\'' +
+                ", note='" + note + '\'' +
+                '}';
     }
 }
