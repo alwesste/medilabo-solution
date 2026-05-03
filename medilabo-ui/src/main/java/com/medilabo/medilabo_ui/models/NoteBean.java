@@ -1,31 +1,35 @@
 package com.medilabo.medilabo_ui.models;
 
 public class NoteBean {
-    private Long id;
-    private Long patientId;
+
+    private String id;
+    private Long patId;
+    private String patient;
     private String note;
 
-    public Long getId() {
-        return id;
-    }
+    public String getId() { return id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public void setId(String id) { this.id = id; }
 
-    public String getNote() {
-        return note;
-    }
+    public Long getPatId() { return patId; }
 
-    public void setNote(String note) {
-        this.note = note;
-    }
+    public void setPatId(Long patId) { this.patId = patId; }
 
-    public Long getPatientId() {
-        return patientId;
-    }
+    public String getPatient() { return patient; }
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
+    public void setPatient(String patient) { this.patient = patient; }
+
+    public String getNote() { return note; }
+
+    public void setNote(String note) { this.note = note; }
+
+    @Override
+    public String toString() {
+        return "NoteBean{" +
+                "id='" + id + '\'' +
+                ", patId='" + patId + '\'' +
+                ", patient='" + patient + '\'' +
+                ", note='" + note + '\'' +
+                '}';
     }
 }

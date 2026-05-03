@@ -7,43 +7,77 @@
     <style>
         body { font-family: Arial; margin: 40px; }
         .patient-card { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+
+        .container { display: flex; gap: 100px; justify-content: center;}
     </style>
 </head>
 
 <body>
 
-<h1>Patient</h1>
+<div class="container">
+    <div class="container-patient">
+
+        <h1>Patient</h1>
+        <h3 th:text="${patient.prenom + ' ' + patient.nom}">Nom</h3>
+
+        <p><strong>Date de naissance :</strong>
+            <span th:text="${patient.birthDate}"></span>
+        </p>
+
+        <p><strong>Genre :</strong>
+            <span th:text="${patient.genre}"></span>
+        </p>
+
+        <p><strong>Adresse :</strong>
+            <span th:text="${patient.adressePostal}"></span>
+        </p>
+
+        <p><strong>Telephone :</strong>
+            <span th:text="${patient.phoneNumber}"></span>
+        </p>
+        <div class="actions">
+            <div>
+                <a th:href="@{/update/patient/{id}(id=${patient.id})}">
+                    Modifier
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-note">
+        <h1>Notes :</h1>
+        <ul th:if="${notes != null and !notes.isEmpty()}">
+            <li th:each="note : ${notes}" th:text="${note.note}"></li>
+        </ul>
+        <p th:if="${notes == null or notes.isEmpty()}">Vous n'avez aucune note pour le moment.</p>
+
+        <div class="actions">
+            <div>
 
 
-<h3 th:text="${patient.prenom + ' ' + patient.nom}">Nom</h3>
+                <form th:action="@{/add/note/{id}(id=${patient.id})}"
+                      th:object="${noteBean}"
+                      method="post">
 
-<p><strong>Date de naissance :</strong>
-    <span th:text="${patient.birthDate}"></span>
-</p>
+                    <label>Note</label>
+                    <input type="text" th:field="*{note}"/>
+                    <p th:if="${erreur != null}"
+                       th:text="${erreur}"
+                       style="color: red;">
+                    </p>
 
-<p><strong>Genre :</strong>
-    <span th:text="${patient.genre}"></span>
-</p>
+                    <button type="submit">Ajouter une note</button>
+                </form>
 
-<p><strong>Adresse :</strong>
-    <span th:text="${patient.adressePostal}"></span>
-</p>
+                <a th:href="@{/patients}">Revenir en arriere</a>
 
-<p><strong>Telephone :</strong>
-    <span th:text="${patient.phoneNumber}"></span>
-</p>
-
-<p><strong>Note :</strong>
-    test
-</p>
-
-<div class="actions">
-    <div>
-        <a th:href="@{/update/patient/{id}(id=${patient.id})}">
-            Modifier
-        </a>
+            </div>
+        </div>
     </div>
 </div>
+
+
+
 
 </body>
 </html>

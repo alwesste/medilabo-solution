@@ -52,4 +52,14 @@ public class PatientBean extends PersonBean {
     public void generalReport() {
         System.out.println("generateReport");
     }
+
+    @Override
+    public String toString() {
+        return "PatientBean{" +
+                "birthDate=" + birthDate +
+                ", genre='" + genre + '\'' +
+                ", adressePostal='" + adressePostal + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }
