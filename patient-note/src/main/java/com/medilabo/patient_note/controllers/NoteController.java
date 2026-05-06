@@ -21,10 +21,10 @@ public class NoteController {
     @GetMapping("/api/note/{id}")
     List<Note> getNote(@PathVariable Long id) {
         logger.info("Id recupere depuis l'ui: {}", id);
-        return noteService.getNoteByPatient(id);
+        return noteService.getNotesByPatient(id);
     }
 
-    @PostMapping("/api/add/note")
+    @PostMapping("/api/note/add")
     public ResponseEntity<String> addNote(@RequestBody Note note) {
         if (note.getNote() == null || note.getNote().isBlank()) {
             return ResponseEntity.badRequest().body("La note ne peut pas être vide");

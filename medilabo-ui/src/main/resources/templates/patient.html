@@ -53,8 +53,6 @@
 
         <div class="actions">
             <div>
-
-
                 <form th:action="@{/add/note/{id}(id=${patient.id})}"
                       th:object="${noteBean}"
                       method="post">
@@ -65,14 +63,17 @@
                        th:text="${erreur}"
                        style="color: red;">
                     </p>
-
                     <button type="submit">Ajouter une note</button>
                 </form>
-
                 <a th:href="@{/patients}">Revenir en arriere</a>
 
             </div>
         </div>
+    </div>
+
+    <div class="container-rapport">
+        <h1>Rapport :</h1>
+        <p th:text="${risqueLevel.label}"></p>
     </div>
 </div>
 

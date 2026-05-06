@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface INoteService {
 
-    List<Note> getNoteByPatient(Long patId);
+    List<Note> getNotesByPatient(Long patId);
     void addNote(Note note);
 }

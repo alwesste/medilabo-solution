@@ -15,7 +15,7 @@ public interface MicroserviceNoteProxy {
     @GetMapping(value = "/api/note/{id}")
     List<NoteBean> getNoteByPatientId(@PathVariable Long id);
 
-    @PostMapping("/api/add/note")
+    @PostMapping("/api/note/add")
     void addNote(@RequestBody NoteBean noteBean);
 
 }

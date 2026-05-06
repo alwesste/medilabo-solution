@@ -2,6 +2,7 @@ package com.medilabo.medilabo_ui.constroller;
 
 import com.medilabo.medilabo_ui.models.NoteBean;
 import com.medilabo.medilabo_ui.models.PatientBean;
+import com.medilabo.medilabo_ui.proxies.MicroServiceRapportProxy;
 import com.medilabo.medilabo_ui.proxies.MicroserviceNoteProxy;
 import com.medilabo.medilabo_ui.proxies.MicroservicePatientProxy;
 import org.slf4j.Logger;
@@ -15,12 +16,13 @@ public class ClientController {
     private static final Logger logger= LoggerFactory.getLogger(ClientController.class);
 
     private final MicroservicePatientProxy microservicePatientProxy;
-
     private final MicroserviceNoteProxy microserviceNoteProxy;
+    private final MicroServiceRapportProxy microServiceRapportProxy;
 
-    public ClientController(MicroservicePatientProxy microservicePatientProxy, MicroserviceNoteProxy microserviceNoteProxy) {
+    public ClientController(MicroservicePatientProxy microservicePatientProxy, MicroserviceNoteProxy microserviceNoteProxy, MicroServiceRapportProxy microServiceRapportProxy) {
         this.microservicePatientProxy = microservicePatientProxy;
         this.microserviceNoteProxy = microserviceNoteProxy;
+        this.microServiceRapportProxy = microServiceRapportProxy;
     }
 
     @GetMapping("/patients")
@@ -37,10 +39,9 @@ public class ClientController {
 
     @GetMapping("patient/details/{id}")
     public String getDetailPatient(@PathVariable Long id, Model model) {
-        logger.info("Objet patient : {}", microservicePatientProxy.getPatient(id) );
         model.addAttribute("patient", microservicePatientProxy.getPatient(id));
-        logger.info("Objet note : {}", microserviceNoteProxy.getNoteByPatientId(id) );
         model.addAttribute("notes", microserviceNoteProxy.getNoteByPatientId(id));
+        model.addAttribute("risqueLevel", microServiceRapportProxy.getRisqueLevelByPatientId(id));
         model.addAttribute("noteBean", new NoteBean());
         return "patient";
     }
@@ -78,7 +79,6 @@ public class ClientController {
     public String addPatient(@ModelAttribute PatientBean patientBean) {
         microservicePatientProxy.addPatient(patientBean);
         return "redirect:/patients";
-
     }
 
 }

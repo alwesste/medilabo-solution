@@ -16,7 +16,7 @@ public class NoteService implements INoteService {
         this.noteDAO = noteDAO;
     }
 
-    public List<Note> getNoteByPatient(Long patId) {
+    public List<Note> getNotesByPatient(Long patId) {
         return noteDAO.findByPatId(patId);
     }
 
