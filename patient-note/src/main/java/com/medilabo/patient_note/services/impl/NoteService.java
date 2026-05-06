@@ -1,13 +1,14 @@
-package com.medilabo.patient_note.services;
+package com.medilabo.patient_note.services.impl;
 
 import com.medilabo.patient_note.DAO.NoteDAO;
 import com.medilabo.patient_note.model.Note;
+import com.medilabo.patient_note.services.INoteService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class NoteService {
+public class NoteService implements INoteService {
 
     private final NoteDAO noteDAO;
 

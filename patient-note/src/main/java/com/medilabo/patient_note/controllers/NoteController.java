@@ -1,7 +1,7 @@
 package com.medilabo.patient_note.controllers;
 
 import com.medilabo.patient_note.model.Note;
-import com.medilabo.patient_note.services.NoteService;
+import com.medilabo.patient_note.services.impl.NoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
