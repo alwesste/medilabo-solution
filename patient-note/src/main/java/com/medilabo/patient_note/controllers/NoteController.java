@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controleur REST permettant de gerer les notes des médecins concernant les patients
+ */
 @RestController
 public class NoteController {
     private static final Logger logger = LoggerFactory.getLogger(NoteController.class);
@@ -18,12 +21,23 @@ public class NoteController {
         this.noteService = noteService;
     }
 
+    /**
+     * Récupère les notes associées à un patient.
+     * @param id identifiant du patient
+     * @return la liste des notes du patient
+     */
     @GetMapping("/api/note/{id}")
     List<Note> getNote(@PathVariable Long id) {
         logger.info("Id recupere depuis l'ui: {}", id);
         return noteService.getNotesByPatient(id);
     }
 
+
+    /**
+     * Ajoute une nouvelle note médicale.
+     * @param note note à ajouter
+     * @return une réponse indiquant le résultat de l’opération
+     */
     @PostMapping("/api/note/add")
     public ResponseEntity<String> addNote(@RequestBody Note note) {
         if (note.getNote() == null || note.getNote().isBlank()) {

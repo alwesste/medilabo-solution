@@ -7,9 +7,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+/**
+ * Client Feign permettant de communiquer avec le microservice des notes
+ */
 @FeignClient(name = "patient-note")
 public interface NoteProxy {
 
+    /**
+     * Récupère les notes associées à un patient.
+     * @param id identifiant du patient
+     * @return la liste des notes du patient
+     */
     @GetMapping("/api/note/{id}")
     public List<Note> getNotesByPatient(@PathVariable Long id);
 }

@@ -12,6 +12,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    /**
+     * Configure les routes authorises, les sessions, logout et filtre personalise
+     * @param http
+     * @return la securityFilterChain
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http

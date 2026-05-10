@@ -14,10 +14,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+
+/**
+ * Configuration de la securite de l'application, definit l'acces aux ressources de l'application ainsi
+ * que la strategie de gestion statless du serveur.
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+    /**
+     *
+     * Configure les routes autorisees, les sessions, logout et filtres personalise
+     * @return  la SecurityFilterChain, la chaine de filtre de spring-security
+     * @throws Exception
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -34,6 +46,10 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Definit les utilisateurs pouvant acceder à l'application
+     * @return le service de gestion des utilisateurs utilise par spring-secutity
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.builder()
@@ -44,6 +60,10 @@ public class SecurityConfig {
         return new InMemoryUserDetailsManager(user);
     }
 
+    /**
+     *
+     * @return un PasswordEncoder pour le hashage de mot de passe
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
