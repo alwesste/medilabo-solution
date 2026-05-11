@@ -6,6 +6,8 @@ import com.medilabo.patient.services.IOrganisateurService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +57,7 @@ public class OrganisateurService implements IOrganisateurService {
     public Optional<Patient> getPatientById(Long id) {
         return patientDAO.findById(id);
     }
+
 
     @Override
     public List<Patient> getAllPatients() {

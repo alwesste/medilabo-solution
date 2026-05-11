@@ -1,7 +1,10 @@
 package com.medilabo.patient.controllers;
 
+import com.medilabo.patient.DTO.PatientDTO;
 import com.medilabo.patient.entities.Patient;
 import com.medilabo.patient.services.impl.OrganisateurService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +16,7 @@ import java.util.List;
 @RestController
 public class OrganisateurController {
 
+    private static final Logger logger = LoggerFactory.getLogger(OrganisateurController.class);
     private final OrganisateurService organisateurService;
 
     public OrganisateurController(OrganisateurService organisateurService) {
@@ -35,10 +39,28 @@ public class OrganisateurController {
      */
     @GetMapping("/api/patient/detail/{id}")
     public ResponseEntity<Patient> getPatient(@PathVariable Long id) {
+        logger.info("Info patient: {}", organisateurService.getPatientById(id));
         return organisateurService.getPatientById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    /**
+     * Recupere les informations d'un patient en fonction de son id pour la generation d'un rapport
+     * @param id
+     * @return le patient correspondant
+     */
+    @GetMapping("/api/rapport/patient/detail/{id}")
+    public ResponseEntity<PatientDTO> getPatientForRapport(@PathVariable Long id) {
+        return organisateurService.getPatientById(id)
+                .map(patient -> {
+                    String gender = patient.getGenre();
+                    System.out.println("GENDER" + gender);
+                    return ResponseEntity.ok(new PatientDTO(gender, patient.getBirthDate()));
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
 
     /**
      * Met a jour les informations d'un patient

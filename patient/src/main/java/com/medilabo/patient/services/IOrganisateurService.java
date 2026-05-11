@@ -36,4 +36,5 @@ public interface IOrganisateurService {
      * @return le patient enregistré
      */
     Patient addPatient(Patient patient);
+
 }

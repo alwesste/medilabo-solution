@@ -7,6 +7,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "patient")
 public class Patient extends Person {
+    @Column(name = "birth_date")
     private LocalDate birthDate;
     private String genre;
     private String adressePostal;
@@ -49,4 +50,14 @@ public class Patient extends Person {
         this.phoneNumber = phoneNumber;
     }
 
+    @Override
+    public String toString() {
+        return "Patient{" +
+                "birthDate=" + birthDate +
+                ", genre='" + genre + '\'' +
+                ", adressePostal='" + adressePostal + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", medecin=" + medecin +
+                '}';
+    }
 }
