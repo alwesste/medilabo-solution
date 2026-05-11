@@ -1,6 +1,6 @@
 package com.medilabo.patient_rapport.proxies;
 
-import com.medilabo.patient_rapport.models.Note;
+import com.medilabo.patient_rapport.models.NoteDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,5 +19,5 @@ public interface NoteProxy {
      * @return la liste des notes du patient
      */
     @GetMapping("/api/note/{id}")
-    public List<Note> getNotesByPatient(@PathVariable Long id);
+    public List<NoteDTO> getNotesByPatient(@PathVariable Long id);
 }

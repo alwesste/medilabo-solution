@@ -1,6 +1,6 @@
 package com.medilabo.patient_rapport.services;
 
-import com.medilabo.patient_rapport.models.Note;
+import com.medilabo.patient_rapport.models.NoteDTO;
 import com.medilabo.patient_rapport.proxies.NoteProxy;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class NoteService {
         this.noteProxy = noteProxy;
     }
 
-    public List<Note> getNotesByPatientId(Long id) {
+    public List<NoteDTO> getNotesByPatientId(Long id) {
         return noteProxy.getNotesByPatient(id);
     }
 }
