@@ -8,6 +8,6 @@ VALUES
 ('TestInDanger', 'Test', '2004-06-18', 'M', '3 Club Road', '300-444-5555'),
 ('TestEarlyOnset', 'Test', '2002-06-28', 'F', '4 Valley Dr', '400-555-6666');
 
-INSERT INTO `medilabo`.`medecin`(`prenom`,`nom`,`specialite`)
-VALUES
-('pierre','dido','diabete');
+--INSERT INTO `medilabo`.`medecin`(`prenom`,`nom`,`specialite`)
+--VALUES
+--('pierre','dido','diabete');

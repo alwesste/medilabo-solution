@@ -5,10 +5,12 @@ import com.medilabo.medilabo_ui.models.PatientBean;
 import com.medilabo.medilabo_ui.proxies.MicroServiceRapportProxy;
 import com.medilabo.medilabo_ui.proxies.MicroserviceNoteProxy;
 import com.medilabo.medilabo_ui.proxies.MicroservicePatientProxy;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -73,7 +75,7 @@ public class ClientController {
      */
     @GetMapping("/update/patient/{id}")
     public String showUpdateForm(@PathVariable Long id, Model model) {
-        model.addAttribute("patient", microservicePatientProxy.getPatient(id));
+        model.addAttribute("patientBean", microservicePatientProxy.getPatient(id));
         model.addAttribute("notes", microserviceNoteProxy.getNoteByPatientId(id));
         return "patientUpdate";
     }
@@ -85,8 +87,12 @@ public class ClientController {
      * @return la vue patients
      */
     @PostMapping("/update/patient/{id}")
-    public String updatePatient(@PathVariable Long id,
-                                @ModelAttribute PatientBean patientBean) {
+    public String updatePatient( @PathVariable Long id, @Valid @ModelAttribute PatientBean patientBean, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("patientBean", patientBean);
+            model.addAttribute("notes", microserviceNoteProxy.getNoteByPatientId(id));
+            return "patientUpdate";
+        }
         microservicePatientProxy.updatePatient(patientBean);
         return "redirect:/patients";
     }
@@ -119,7 +125,10 @@ public class ClientController {
      * @return la vue patients
      */
     @PostMapping("/add/patient")
-    public String addPatient(@ModelAttribute PatientBean patientBean) {
+    public String addPatient(@Valid @ModelAttribute PatientBean patientBean, BindingResult result) {
+        if (result.hasErrors()) {
+            return "patientAdd";
+        }
         microservicePatientProxy.addPatient(patientBean);
         return "redirect:/patients";
     }
