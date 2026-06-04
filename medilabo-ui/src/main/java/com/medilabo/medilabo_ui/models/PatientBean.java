@@ -1,13 +1,19 @@
 package com.medilabo.medilabo_ui.models;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 public class PatientBean extends PersonBean {
 
+    @NotNull(message = "La date de naissance est obligatoire")
     private LocalDate birthDate;
+    @NotBlank(message = "Le genre est obligatoire")
     private String genre;
     private String adressePostal;
     private String phoneNumber;
+
 
     public LocalDate getBirthDate() {
         return birthDate;
@@ -41,17 +47,6 @@ public class PatientBean extends PersonBean {
         this.phoneNumber = phoneNumber;
     }
 
-    public void checkHistoric() {
-        System.out.println("Voir historique");
-    }
-
-    public void addNote() {
-        System.out.println("Voir note");
-    }
-
-    public void generalReport() {
-        System.out.println("generateReport");
-    }
 
     @Override
     public String toString() {

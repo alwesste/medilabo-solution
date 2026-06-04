@@ -1,13 +1,16 @@
 package com.medilabo.patient.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @MappedSuperclass
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String prenom;
+    @NotBlank
     private String nom;
 
     public Long getId() {

@@ -3,76 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Medilabo</title>
-
-    <style>
-        body { font-family: Arial; margin: 40px;  width: 1000px; }
-        .container { display: flex; gap: 50px; flex-direction: column; }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
-
 <div class="container">
-    <div class="container-patient">
 
-        <h1>Patient</h1>
-        <h3 th:text="${patient.prenom + ' ' + patient.nom}">Nom</h3>
+    <div class="header-section">
+        <h1>Fiche Patient Clinique Medilabo</h1>
+        <a th:href="@{/patients}" class="btn btn-secondary">← Revenir à la liste</a>
+    </div>
 
-        <p><strong>Date de naissance :</strong>
-            <span th:text="${patient.birthDate}"></span>
-        </p>
+    <div class="dashboard-layout">
 
-        <p><strong>Genre :</strong>
-            <span th:text="${patient.genre}"></span>
-        </p>
+        <div class="card info-card">
+            <h2>Informations Générales</h2>
+            <h3 class="patient-name" th:text="${patient.prenom + ' ' + patient.nom}">Nom Patient</h3>
 
-        <p><strong>Adresse :</strong>
-            <span th:text="${patient.adressePostal}"></span>
-        </p>
+            <div class="info-group">
+                <p><strong>Date de naissance :</strong> <span th:text="${patient.birthDate}">-</span></p>
+                <p><strong>Genre :</strong> <span th:text="${patient.genre}">-</span></p>
+                <p><strong>Adresse :</strong> <span th:text="${patient.adressePostal}">-</span></p>
+                <p><strong>Téléphone :</strong> <span th:text="${patient.phoneNumber}">-</span></p>
+            </div>
 
-        <p><strong>Telephone :</strong>
-            <span th:text="${patient.phoneNumber}"></span>
-        </p>
-        <div class="actions">
-            <div>
-                <a th:href="@{/update/patient/{id}(id=${patient.id})}">
-                    Modifier
+            <div class="card-actions">
+                <a th:href="@{/update/patient/{id}(id=${patient.id})}" class="btn btn-primary">
+                    Modifier la fiche
                 </a>
             </div>
         </div>
+
+        <div class="card rapport-card">
+            <h2>Évaluation du Risque</h2>
+            <div class="badge-status">
+                <span class="status-label" th:text="${risqueLevel.label}">Niveau de risque</span>
+            </div>
+        </div>
+
     </div>
 
-    <div class="container-note">
-        <h1>Notes :</h1>
-        <ul th:if="${notes != null and !notes.isEmpty()}">
-            <li th:each="note : ${notes}" th:text="${note.note}"></li>
-        </ul>
-        <p th:if="${notes == null or notes.isEmpty()}">Vous n'avez aucune note pour le moment.</p>
+    <div class="card notes-section">
+        <h2>Notes Évolutives du Praticien</h2>
 
-        <div class="actions">
-            <div>
-                <form th:action="@{/add/note/{id}(id=${patient.id})}"
-                      th:object="${noteBean}"
-                      method="post">
-
-                    <label>Note</label>
-                    <input type="text" th:field="*{note}"/>
-                    <p th:if="${erreur != null}"
-                       th:text="${erreur}"
-                       style="color: red;">
-                    </p>
-                    <button type="submit">Ajouter une note</button>
-                </form>
-                <a th:href="@{/patients}">Revenir en arriere</a>
-
+        <div th:if="${notes != null and !notes.isEmpty()}" class="notes-timeline">
+            <div th:each="note : ${notes}" class="note-item">
+                <p class="note-text" th:text="${note.note}"></p>
             </div>
+        </div>
+
+        <div th:if="${notes == null or notes.isEmpty()}" class="empty-notes">
+            <p>Aucune note clinique enregistrée pour ce patient.</p>
+        </div>
+
+        <div class="note-form-container">
+            <h3>Ajouter une observation</h3>
+            <form th:action="@{/add/note/{id}(id=${patient.id})}" th:object="${noteBean}" method="post">
+                <div class="form-group">
+                    <textarea th:field="*{note}" placeholder="Saisissez vos observations cliniques ici..." rows="6" cols="120"></textarea>
+                    <span class="error-message" th:if="${erreur != null}" th:text="${erreur}"></span>
+                </div>
+                <button type="submit" class="btn btn-success">Enregistrer la note</button>
+            </form>
         </div>
     </div>
 
-    <div class="container-rapport">
-        <h1>Rapport :</h1>
-        <p th:text="${risqueLevel.label}"></p>
-    </div>
 </div>
 
 </body>

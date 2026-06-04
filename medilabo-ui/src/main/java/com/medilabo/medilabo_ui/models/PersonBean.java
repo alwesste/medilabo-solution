@@ -1,8 +1,12 @@
 package com.medilabo.medilabo_ui.models;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class PersonBean {
     private Long id;
+    @NotBlank(message = "Le prenom est obligatoire")
     private String prenom;
+    @NotBlank(message = "Le nom est obligatoire")
     private String nom;
 
     public Long getId() {

@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,7 +30,7 @@ public class RapportService {
         PatientDTO patientDTODetail = patientService.getPatient(patientId);
         Gender patientGender = patientDTODetail.genre();
         int patientAge = Period.between(patientDTODetail.birthDate(), LocalDate.now()).getYears();
-        logger.info("Nombre de declencheur: {} age de la personne : {} gender: {}", declencheurNumber, patientAge, patientGender);
+        logger.info("Nombre de declencheur: {}, age de la personne : {}, gender: {}", declencheurNumber, patientAge, patientGender);
 
 
         if (declencheurNumber == 0) {
@@ -72,7 +73,16 @@ public class RapportService {
 
     private long getNumberOfDelencheurByPatient(Long patientId) {
         List<NoteDTO> noteDTOS = noteService.getNotesByPatientId(patientId);
-        String notesContent = noteDTOS.stream().map(NoteDTO::note).collect(Collectors.joining(" "));
+
+        if (noteDTOS == null || noteDTOS.isEmpty()) {
+            logger.info("Aucune note pour le patient ID : {} ", patientId);
+            return 0;
+        }
+
+        String notesContent = noteDTOS.stream()
+                .map(NoteDTO::note)
+                .filter(Objects::nonNull)
+                .collect(Collectors.joining(" "));
         String lowerNoteContent = notesContent.toLowerCase();
         long numberOfDeclencheur = Arrays.stream(Declencheur.values()).filter(declencheur -> lowerNoteContent.contains(declencheur.getLibelle())).count();
         return numberOfDeclencheur;

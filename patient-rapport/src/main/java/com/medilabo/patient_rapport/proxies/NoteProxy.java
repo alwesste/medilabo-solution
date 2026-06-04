@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Client Feign permettant de communiquer avec le microservice des notes
  */
-@FeignClient(name = "patient-note")
+@FeignClient(name = "gateway-note", url = "http://localhost:9003")
 public interface NoteProxy {
 
     /**
