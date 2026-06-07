@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * Client Feign permettant de communiquer avec le microservice des rapports.
  */
-@FeignClient(name = "gateway-rapport", url = "http://localhost:9003")
+@FeignClient(name = "gateway-rapport", url = "${gateway.url}")
 public interface MicroServiceRapportProxy {
 
     /**

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Client Feign permettant de communiquer avec le microservice des patients.
  */
-@FeignClient(name = "gateway", url = "http://localhost:9003")
+@FeignClient(name = "gateway", url = "${gateway.url}")
 public interface MicroservicePatientProxy {
 
     /**

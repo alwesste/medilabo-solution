@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 /**
  * Client Feign permettant de communiquer avec le microservice des patients.
  */
-@FeignClient(name = "gateway", url = "http://localhost:9003")
+@FeignClient(name = "gateway", url = "${gateway.url}")
 public interface PatientProxy {
 
     /**

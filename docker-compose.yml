@@ -1,0 +1,200 @@
+services:
+
+  eureka:
+    build:
+      context: ./eureka
+      dockerfile: Dockerfile
+    container_name: eureka
+    ports:
+      - "9002:9002"
+    environment:
+      - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+    networks:
+      - medilabo-network
+    depends_on:
+      config-server:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9002/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+
+  config-server:
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    container_name: config-server
+    ports:
+      - "9101:9101"
+    environment:
+      - GIT_URI=https://github.com/alwesste/medilabo-solution
+    networks:
+      - medilabo-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9101/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: gateway
+    ports:
+      - "9003:9003"
+    environment:
+      - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
+    networks:
+      - medilabo-network
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+
+
+  patient:
+    build:
+      context: ./patient
+      dockerfile: Dockerfile
+    container_name: patient
+    ports:
+      - "9001:9001"
+    environment:
+      - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/medilabo
+      - SPRING_DATASOURCE_USERNAME=medilabo_user
+      - SPRING_DATASOURCE_PASSWORD=medilabo_password
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
+    networks:
+      - medilabo-network
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+      mysql:
+        condition: service_healthy
+
+  patient-note:
+    build:
+      context: ./patient-note
+      dockerfile: Dockerfile
+    container_name: patient-note
+    ports:
+      - "9004:9004"
+    environment:
+      - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
+      - SPRING_DATA_MONGODB_URI=mongodb://medilabo:medilabo@mongodb:27017/patient_note_db?authSource=admin
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
+    networks:
+      - medilabo-network
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+      mongodb :
+        condition: service_healthy
+
+
+  patient-rapport:
+    build:
+      context: ./patient-rapport
+      dockerfile: Dockerfile
+    container_name: patient-rapport
+    ports:
+      - "9005:9005"
+    environment:
+      - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/medilabo
+      - SPRING_DATASOURCE_USERNAME=medilabo_user
+      - SPRING_DATASOURCE_PASSWORD=medilabo_password
+    networks:
+      - medilabo-network
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+
+
+  medilabo-ui:
+    build:
+      context: ./medilabo-ui
+      dockerfile: Dockerfile
+    container_name: medilabo-ui
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
+      - GATEWAY_URL=http://gateway:9003
+    networks:
+      - medilabo-network
+    depends_on:
+      config-server:
+        condition: service_healthy
+      eureka:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=X46ar3vh0!!
+      - MYSQL_DATABASE=medilabo
+      - MYSQL_USER=medilabo_user
+      - MYSQL_PASSWORD=medilabo_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - medilabo-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+#      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/medilabo_notes
+      - MONGO_INITDB_ROOT_USERNAME=medilabo
+      - MONGO_INITDB_ROOT_PASSWORD=medilabo
+      - MONGO_INITDB_DATABASE=patient_note_db
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - medilabo-network
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+networks:
+  medilabo-network:
+    driver: bridge
+    
+volumes:
+  mysql-data:
+  mongo-data:
