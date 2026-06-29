@@ -93,9 +93,9 @@ services:
     ports:
       - "9004:9004"
     environment:
-      - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
-      - SPRING_DATA_MONGODB_URI=mongodb://medilabo:medilabo@mongodb:27017/patient_note_db?authSource=admin
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
+    - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
+    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
+    - SPRING_DATA_MONGODB_URI=mongodb://medilabo:medilabo@mongodb:27017/patient_note_db?authSource=admin
     networks:
       - medilabo-network
     depends_on:
@@ -182,6 +182,7 @@ services:
       - MONGO_INITDB_DATABASE=patient_note_db
     volumes:
       - mongo-data:/data/db
+      - ./patient-note/src/main/resources/data.js:/docker-entrypoint-initdb.d/data.js:ro
     networks:
       - medilabo-network
     healthcheck:

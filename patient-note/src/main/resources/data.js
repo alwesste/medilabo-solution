@@ -1,4 +1,8 @@
-[
+db = db.getSiblingDB('patient_note_db');
+
+db.patientNote.drop();
+
+db.patientNote.insertMany([
   {
     "patId": 1,
     "patient": "TestNone",
@@ -44,4 +48,4 @@
     "patient": "TestEarlyOnset",
     "note": "Taille, Poids, Cholestérol, Vertige et Réaction"
   }
-]
+]);
