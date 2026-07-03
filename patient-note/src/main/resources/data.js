@@ -1,8 +1,8 @@
 db = db.getSiblingDB('patient_note_db');
 
-db.patientNote.drop();
+db.note.drop();
 
-db.patientNote.insertMany([
+db.note.insertMany([
   {
     "patId": 1,
     "patient": "TestNone",

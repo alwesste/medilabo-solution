@@ -93,9 +93,16 @@ services:
     ports:
       - "9004:9004"
     environment:
-    - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
-    - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
-    - SPRING_DATA_MONGODB_URI=mongodb://medilabo:medilabo@mongodb:27017/patient_note_db?authSource=admin
+#    - SPRING_DATA_MONGODB_URI=mongodb://medilabo:medilabo@mongodb:27017/patient_note_db?authSource=admin
+      - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
+      - SPRING_DATA_MONGODB_URI=mongodb://medilabo:medilabo@mongodb:27017/patient_note_db?authSource=admin
+      - SPRING_DATA_MONGODB_HOST=mongodb
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=patient_note_db
+      - SPRING_DATA_MONGODB_USERNAME=medilabo
+      - SPRING_DATA_MONGODB_PASSWORD=medilabo
+      - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
     networks:
       - medilabo-network
     depends_on:
