@@ -1,7 +1,7 @@
 package com.medilabo.patient_rapport.controllers;
 
 import com.medilabo.patient_rapport.models.RisqueLevel;
-import com.medilabo.patient_rapport.services.RapportService;
+import com.medilabo.patient_rapport.services.imp.RapportService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

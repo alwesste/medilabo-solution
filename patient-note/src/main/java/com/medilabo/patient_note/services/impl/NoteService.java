@@ -1,7 +1,7 @@
 package com.medilabo.patient_note.services.impl;
 
 import com.medilabo.patient_note.DAO.NoteDAO;
-import com.medilabo.patient_note.model.Note;
+import com.medilabo.patient_note.models.Note;
 import com.medilabo.patient_note.services.INoteService;
 import org.springframework.stereotype.Service;
 

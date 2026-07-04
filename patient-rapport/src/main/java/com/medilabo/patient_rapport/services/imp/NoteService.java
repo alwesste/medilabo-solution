@@ -1,4 +1,4 @@
-package com.medilabo.patient_rapport.services;
+package com.medilabo.patient_rapport.services.imp;
 
 import com.medilabo.patient_rapport.models.NoteDTO;
 import com.medilabo.patient_rapport.proxies.NoteProxy;

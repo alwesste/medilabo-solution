@@ -43,32 +43,39 @@
 
                 <div class="form-group">
                     <label for="birthDate">Date de naissance</label>
-                    <input type="date" id="birthDate" th:field="*{birthDate}"/>
+                    <input type="date" id="birthDate" th:field="*{birthDate}" th:attr="max=${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"/>
                     <span class="error-message" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="genre">Genre</label>
-                    <input type="text" id="genre" th:field="*{genre}" placeholder="M ou F"/>
+                    <select id="genre" th:field="*{genre}">
+                        <option value="" disabled selected>-- Sélectionner --</option>
+                        <option value="M">Homme</option>
+                        <option value="F">Femme</option>
+                    </select>
                     <span class="error-message" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></span>
                 </div>
 
                 <div class="form-group full-width">
                     <label for="adressePostal">Adresse postale</label>
-                    <input type="text" id="adressePostal" th:field="*{adressePostal}" placeholder="Adresse complète"/>
+                    <input type="text" id="adressePostal" th:field="*{adressePostal}" placeholder="Ex: 10 rue du petit train, 75000 Paris"/>
                 </div>
 
                 <div class="form-group full-width">
                     <label for="phoneNumber">Numéro de téléphone</label>
-                    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Numéro de contact"/>
+                    <input type="tel" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Ex: 01 23 45 67 89"
+                           pattern="(\d{10}|\d{3}-\d{3}-\d{4})" required maxlength="10"/>
                 </div>
-
+                <span class="error-message" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span>
             </div>
 
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
                 <a th:href="@{/patients}" class="btn btn-secondary">Annuler</a>
             </div>
+
+            <div class="error-message" th:if="${erreur}" th:text="${erreur}"></div>
 
         </form>
     </div>

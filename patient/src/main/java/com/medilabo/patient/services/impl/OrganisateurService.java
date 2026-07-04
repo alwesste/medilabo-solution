@@ -2,6 +2,7 @@ package com.medilabo.patient.services.impl;
 
 import com.medilabo.patient.DAO.PatientDAO;
 import com.medilabo.patient.entities.Patient;
+import com.medilabo.patient.exceptions.PatientAlreadyExistException;
 import com.medilabo.patient.services.IOrganisateurService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,16 @@ public class OrganisateurService implements IOrganisateurService {
     public Patient updatePatient(Patient patient) {
         Patient patientToUpdate = patientDAO.findById(patient.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Le patient n'a pas ete trouve" + patient.getPrenom()));
+
+        boolean exists = patientDAO.existsPatient(
+                patient.getNom(),
+                patient.getPrenom(),
+                patient.getBirthDate()
+        );
+
+        if (exists) {
+            throw new PatientAlreadyExistException("Un patient avec ce nom, prénom et date de naissance existe déjà");
+        }
 
         patientToUpdate.setPrenom(patient.getPrenom());
         patientToUpdate.setNom(patient.getNom());
@@ -48,7 +59,7 @@ public class OrganisateurService implements IOrganisateurService {
         );
 
         if (exists) {
-            throw new IllegalArgumentException("Un patient avec ce nom, prénom et date de naissance existe déjà");
+            throw new PatientAlreadyExistException("Un patient avec ce nom, prénom et date de naissance existe déjà");
         }
         return patientDAO.save(patient);
     }

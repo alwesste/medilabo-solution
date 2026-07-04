@@ -1,6 +1,6 @@
 package com.medilabo.patient_note.DAO;
 
-import com.medilabo.patient_note.model.Note;
+import com.medilabo.patient_note.models.Note;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

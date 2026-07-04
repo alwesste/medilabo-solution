@@ -1,4 +1,4 @@
-package com.medilabo.patient_note.model;
+package com.medilabo.patient_note.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

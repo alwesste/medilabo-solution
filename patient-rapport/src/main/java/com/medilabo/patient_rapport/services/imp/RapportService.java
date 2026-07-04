@@ -1,6 +1,7 @@
-package com.medilabo.patient_rapport.services;
+package com.medilabo.patient_rapport.services.imp;
 
 import com.medilabo.patient_rapport.models.*;
+import com.medilabo.patient_rapport.services.IRapportService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-public class RapportService {
+public class RapportService implements IRapportService {
 
     private static final Logger logger = LoggerFactory.getLogger(RapportService.class);
     private final NoteService noteService;
@@ -25,6 +26,7 @@ public class RapportService {
     }
 
 
+    @Override
     public RisqueLevel getRapportWithRisqueLevel(Long patientId) {
         Long declencheurNumber = getNumberOfDelencheurByPatient(patientId);
         PatientDTO patientDTODetail = patientService.getPatient(patientId);
@@ -70,12 +72,12 @@ public class RapportService {
         return RisqueLevel.NONE;
     }
 
-
-    private long getNumberOfDelencheurByPatient(Long patientId) {
+    @Override
+    public long getNumberOfDelencheurByPatient(Long patientId) {
         List<NoteDTO> noteDTOS = noteService.getNotesByPatientId(patientId);
 
         if (noteDTOS == null || noteDTOS.isEmpty()) {
-            logger.info("Aucune note pour le patient ID : {} ", patientId);
+            logger.debug("Aucune note pour le patient ID : {} ", patientId);
             return 0;
         }
 

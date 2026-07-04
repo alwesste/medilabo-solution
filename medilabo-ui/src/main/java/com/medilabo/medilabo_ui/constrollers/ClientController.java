@@ -1,10 +1,11 @@
-package com.medilabo.medilabo_ui.constroller;
+package com.medilabo.medilabo_ui.constrollers;
 
 import com.medilabo.medilabo_ui.models.NoteBean;
 import com.medilabo.medilabo_ui.models.PatientBean;
 import com.medilabo.medilabo_ui.proxies.MicroServiceRapportProxy;
 import com.medilabo.medilabo_ui.proxies.MicroserviceNoteProxy;
 import com.medilabo.medilabo_ui.proxies.MicroservicePatientProxy;
+import feign.FeignException;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,8 +94,20 @@ public class ClientController {
             model.addAttribute("notes", microserviceNoteProxy.getNoteByPatientId(id));
             return "patientUpdate";
         }
-        microservicePatientProxy.updatePatient(patientBean);
+
+        try {
+            microservicePatientProxy.updatePatient(patientBean);
+        } catch (FeignException.Conflict ex) {
+            model.addAttribute("patientBean", patientBean);
+            model.addAttribute("erreur", "Un patient avec ce nom, prénom et date de naissance existe déjà.");
+            return "patientUpdate";
+        } catch (FeignException.BadRequest ex) {
+            model.addAttribute("patientBean", patientBean);
+            model.addAttribute("erreur", "Une erreur est survenue lors de l'ajout du patient. Veuillez réessayer.");
+            return "patientUpdate";
+        }
         return "redirect:/patients";
+
     }
 
     /**
@@ -125,11 +138,22 @@ public class ClientController {
      * @return la vue patients
      */
     @PostMapping("/add/patient")
-    public String addPatient(@Valid @ModelAttribute PatientBean patientBean, BindingResult result) {
+    public String addPatient(@Valid @ModelAttribute PatientBean patientBean, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "patientAdd";
         }
-        microservicePatientProxy.addPatient(patientBean);
+
+        try {
+            microservicePatientProxy.addPatient(patientBean);
+        } catch (FeignException.Conflict ex) {
+            model.addAttribute("patientBean", patientBean);
+            model.addAttribute("erreur", "Un patient avec ce nom, prénom et date de naissance existe déjà.");
+            return "patientAdd";
+        } catch (FeignException.BadRequest ex) {
+            model.addAttribute("patientBean", patientBean);
+            model.addAttribute("erreur", "Une erreur est survenue lors de l'ajout du patient. Veuillez réessayer.");
+            return "patientAdd";
+        }
         return "redirect:/patients";
     }
 

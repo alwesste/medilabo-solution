@@ -21,10 +21,10 @@
             <h3 class="patient-name" th:text="${patient.prenom + ' ' + patient.nom}">Nom Patient</h3>
 
             <div class="info-group">
-                <p><strong>Date de naissance :</strong> <span th:text="${patient.birthDate}">-</span></p>
-                <p><strong>Genre :</strong> <span th:text="${patient.genre}">-</span></p>
-                <p><strong>Adresse :</strong> <span th:text="${patient.adressePostal}">-</span></p>
-                <p><strong>Téléphone :</strong> <span th:text="${patient.phoneNumber}">-</span></p>
+                <p><strong>Date de naissance :</strong> <span th:text="${patient.birthDate}"></span></p>
+                <p><strong>Genre :</strong> <span th:text="${patient.genre == 'M' ? 'Homme' : 'Femme'}"></span></p>
+                <p><strong>Adresse :</strong> <span th:text="${patient.adressePostal}"></span></p>
+                <p><strong>Téléphone :</strong> <span th:text="${patient.phoneNumber}"></span></p>
             </div>
 
             <div class="card-actions">

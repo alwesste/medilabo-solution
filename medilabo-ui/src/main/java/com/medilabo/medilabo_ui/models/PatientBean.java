@@ -2,16 +2,20 @@ package com.medilabo.medilabo_ui.models;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDate;
 
 public class PatientBean extends PersonBean {
 
     @NotNull(message = "La date de naissance est obligatoire")
+    @Past(message = "La date de naissance doit être dans le passé")
     private LocalDate birthDate;
     @NotBlank(message = "Le genre est obligatoire")
     private String genre;
     private String adressePostal;
+    @Pattern(regexp = "^(\\d{10}|\\d{3}-\\d{3}-\\d{4})$", message = "Numéro de téléphone invalide")
     private String phoneNumber;
 
 
