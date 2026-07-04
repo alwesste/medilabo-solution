@@ -1,11 +1,11 @@
 package com.medilabo.patient_note.services;
 
-import com.medilabo.patient_note.model.Note;
+import com.medilabo.patient_note.models.Note;
 
 import java.util.List;
 
 /**
- * Interface definissant les services de gestions des notes des medecins
+ * Interface definissant les methodes de gestions des notes des médecins
  */
 public interface INoteService {
 
