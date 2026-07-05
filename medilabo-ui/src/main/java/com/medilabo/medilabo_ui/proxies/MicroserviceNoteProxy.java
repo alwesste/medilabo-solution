@@ -2,10 +2,7 @@ package com.medilabo.medilabo_ui.proxies;
 
 import com.medilabo.medilabo_ui.models.NoteBean;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,4 +27,10 @@ public interface MicroserviceNoteProxy {
     @PostMapping("/api/note/add")
     void addNote(@RequestBody NoteBean noteBean);
 
+    /**
+     * Supprime une note.
+     * @param noteBean la note à supprimer
+     */
+    @DeleteMapping("/api/note/{id}")
+    void deleteNote(@PathVariable String id);
 }

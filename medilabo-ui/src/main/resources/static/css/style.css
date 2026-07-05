@@ -3,6 +3,7 @@
     --primary-hover: #0b5ed7;
     --success-color: #198754;
     --success-hover: #157347;
+    --supp: #bb2d3b;
     --text-color: #212529;
     --bg-color: #f8f9fa;
     --card-bg: #ffffff;
@@ -69,6 +70,21 @@ h1 {
 .btn-success:hover {
     background-color: var(--success-hover);
     transform: translateY(-1px);
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: var(--supp);
+    transform: translateY(-1px);
+}
+
+.btn-sm {
+    padding: 6px 14px;
+    font-size: 13px;
 }
 
 .patient-list {
@@ -235,6 +251,25 @@ h1 {
     margin-bottom: 15px;
     font-size: 15px;
     color: #334155;
+}
+
+.note-item {
+    background-color: #f8fafc;
+    border-left: 4px solid var(--primary-color);
+    padding: 15px;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.note-text {
+    margin: 0;
+    color: #1e293b;
+    font-size: 15px;
+    white-space: pre-line;
+    flex: 1;
 }
 
 .form-group {

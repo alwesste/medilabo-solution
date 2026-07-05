@@ -123,6 +123,7 @@ public class ClientController {
             model.addAttribute("patient", microservicePatientProxy.getPatient(id));
             model.addAttribute("notes", microserviceNoteProxy.getNoteByPatientId(id));
             model.addAttribute("noteBean", new NoteBean());
+            model.addAttribute("risqueLevel", microServiceRapportProxy.getRisqueLevelByPatientId(id));
             model.addAttribute("erreur", "Veuillez saisir une note avant d'envoyer");
             return "patient";
         }
@@ -155,6 +156,22 @@ public class ClientController {
             return "patientAdd";
         }
         return "redirect:/patients";
+    }
+
+    /**
+     * Traite la requête de suppression d'une note.
+     * @param patientId identifiant du patient (pour la redirection)
+     * @param noteId identifiant de la note à supprimer
+     * @return la vue patient
+     */
+    @PostMapping("/delete/note/{patientId}/{noteId}")
+    public String deleteNote(@PathVariable Long patientId, @PathVariable String noteId) {
+        try {
+            microserviceNoteProxy.deleteNote(noteId);
+        } catch (FeignException ex) {
+            logger.warn("Erreur lors de la suppression de la note {} : {}", noteId, ex.getMessage());
+        }
+        return "redirect:/patient/details/{patientId}" ;
     }
 
 }

@@ -18,7 +18,13 @@ public interface INoteService {
 
     /**
      * Ajoute une nouvelle note médicale.
-     * @param note note à ajouter
+     * @param note à ajouter
      */
     void addNote(Note note);
+
+    /**
+     * Supprimer une note médicale.
+     * @param id de la note à supprimer
+     */
+    void deleteNote(String id);
 }

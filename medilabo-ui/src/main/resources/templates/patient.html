@@ -49,6 +49,13 @@
         <div th:if="${notes != null and !notes.isEmpty()}" class="notes-timeline">
             <div th:each="note : ${notes}" class="note-item">
                 <p class="note-text" th:text="${note.note}"></p>
+                <form th:action="@{/delete/note/{patientId}/{noteId}(patientId=${patient.id}, noteId=${note.id})}"
+                      method="post" class="delete-note-form">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Etes-vous certain de supprimer cette note ?');">
+                        Supprimer
+                    </button>
+                </form>
             </div>
         </div>
 

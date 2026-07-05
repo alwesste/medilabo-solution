@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Controleur REST permettant de gerer les notes des médecins concernant les patients
@@ -49,5 +50,23 @@ public class NoteController {
         logger.info("Note ajoutée : {}", note);
         noteService.addNote(note);
         return ResponseEntity.ok("Note ajoutée avec succès");
+    }
+
+    /**
+     * Supprime une note existante.
+     * @param id identifiant de la note à supprimer
+     * @return une réponse indiquant le résultat de l'opération
+     */
+    @DeleteMapping("/api/note/{id}")
+    public ResponseEntity<String> deleteNote(@PathVariable String id) {
+        try {
+            noteService.deleteNote(id);
+            logger.info("Note supprimée : {}", id);
+            return ResponseEntity.ok("Note supprimée avec succès");
+        } catch (NoSuchElementException ex) {
+            return ResponseEntity.notFound().build();
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
 }
