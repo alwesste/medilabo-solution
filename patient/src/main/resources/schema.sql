@@ -1,18 +1,3 @@
---CREATE TABLE IF NOT EXISTS `medecin` (
---  `id` int NOT NULL AUTO_INCREMENT,
---  `prenom` varchar(100) NOT NULL,
---  `nom` varchar(100) NOT NULL,
---  `specialite` varchar(100) DEFAULT NULL,
---  PRIMARY KEY (`id`)
---);
-
---CREATE TABLE IF NOT EXISTS `organisateur` (
---  `id` int NOT NULL AUTO_INCREMENT,
---  `prenom` varchar(100) NOT NULL,
---  `nom` varchar(100) NOT NULL,
---  PRIMARY KEY (`id`)
---);
-
 CREATE TABLE IF NOT EXISTS `patient` (
   `id` int NOT NULL AUTO_INCREMENT,
   `prenom` varchar(100) NOT NULL,

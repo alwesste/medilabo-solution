@@ -71,9 +71,9 @@ services:
       - "9001:9001"
     environment:
       - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/medilabo
-      - SPRING_DATASOURCE_USERNAME=medilabo_user
-      - SPRING_DATASOURCE_PASSWORD=medilabo_password
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE}
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
     networks:
       - medilabo-network
@@ -95,12 +95,12 @@ services:
     environment:
       - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
-      - SPRING_DATA_MONGODB_URI=mongodb://medilabo:medilabo@mongodb:27017/patient_note_db?authSource=admin
+      - SPRING_DATA_MONGODB_URI=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongodb:27017/${MONGO_INITDB_DATABASE}?authSource=admin
       - SPRING_DATA_MONGODB_HOST=mongodb
       - SPRING_DATA_MONGODB_PORT=27017
-      - SPRING_DATA_MONGODB_DATABASE=patient_note_db
-      - SPRING_DATA_MONGODB_USERNAME=medilabo
-      - SPRING_DATA_MONGODB_PASSWORD=medilabo
+      - SPRING_DATA_MONGODB_DATABASE=${MONGO_INITDB_DATABASE}
+      - SPRING_DATA_MONGODB_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - SPRING_DATA_MONGODB_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
       - SPRING_DATA_MONGODB_AUTHENTICATION_DATABASE=admin
     networks:
       - medilabo-network
@@ -123,9 +123,9 @@ services:
     environment:
       - SPRING_CONFIG_IMPORT=configserver:http://config-server:9101
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:9002/eureka
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/medilabo
-      - SPRING_DATASOURCE_USERNAME=medilabo_user
-      - SPRING_DATASOURCE_PASSWORD=medilabo_password
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/${MYSQL_DATABASE}
+      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
+      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
     networks:
       - medilabo-network
     depends_on:
@@ -160,10 +160,10 @@ services:
     ports:
       - "3307:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=X46ar3vh0!!
-      - MYSQL_DATABASE=medilabo
-      - MYSQL_USER=medilabo_user
-      - MYSQL_PASSWORD=medilabo_password
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
@@ -182,9 +182,9 @@ services:
     ports:
       - "27017:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=medilabo
-      - MONGO_INITDB_ROOT_PASSWORD=medilabo
-      - MONGO_INITDB_DATABASE=patient_note_db
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_INITDB_DATABASE}
     volumes:
       - mongo-data:/data/db
       - ./patient-note/src/main/resources/data.js:/docker-entrypoint-initdb.d/data.js:ro
